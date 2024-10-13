@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/WebBrowser.dir/src/webview.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

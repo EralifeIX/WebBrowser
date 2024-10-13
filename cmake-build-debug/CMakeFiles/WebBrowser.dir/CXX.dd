@@ -1,0 +1,11 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles/WebBrowser.dir/main.cpp.o: dyndep
+
+build CMakeFiles/WebBrowser.dir/src/dataitemmanager.cpp.o: dyndep
+
+build CMakeFiles/WebBrowser.dir/src/historyview.cpp.o: dyndep
+
+build CMakeFiles/WebBrowser.dir/src/webbrowser.cpp.o: dyndep
+
+build CMakeFiles/WebBrowser.dir/src/webview.cpp.o: dyndep
+
