@@ -29,3 +29,9 @@ A lightweight web browser developed using Qt 6, designed for a streamlined, user
    ```bash
    git clone https://github.com/EralifeIX/WebBrowser
    cd WebBrowser
+
+
+## Screenshots
+------------------------------------------------------------------------------------------------------------------
+![Screenshot](https://github.com/EralifeIX/WebBrowser/blob/main/screenshots/image1.png)
+![Screenshot](https://github.com/EralifeIX/WebBrowser/blob/main/screenshots/image2.png)
