@@ -10,6 +10,7 @@ WebBrowser_autogen/timestamp: \
 	/home/eralife/Projects/WebBrowser/include/webbrowser.h \
 	/home/eralife/Projects/WebBrowser/include/webview.h \
 	/home/eralife/Projects/WebBrowser/main.cpp \
+	/home/eralife/Projects/WebBrowser/resources.qrc \
 	/home/eralife/Projects/WebBrowser/src/dataitemmanager.cpp \
 	/home/eralife/Projects/WebBrowser/src/historyview.cpp \
 	/home/eralife/Projects/WebBrowser/src/webbrowser.cpp \
@@ -315,6 +316,7 @@ WebBrowser_autogen/timestamp: \
 	/usr/include/qt6/QtCore/QMimeData \
 	/usr/include/qt6/QtCore/QObject \
 	/usr/include/qt6/QtCore/QRect \
+	/usr/include/qt6/QtCore/QRegularExpression \
 	/usr/include/qt6/QtCore/QSize \
 	/usr/include/qt6/QtCore/QSizeF \
 	/usr/include/qt6/QtCore/QString \

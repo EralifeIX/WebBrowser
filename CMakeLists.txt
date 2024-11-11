@@ -24,6 +24,7 @@ add_executable(WebBrowser main.cpp
         src/webview.cpp
         include/webview.h
         include/dataitem.h
+        resources.qrc
 )
 target_link_libraries(WebBrowser
         Qt::Core

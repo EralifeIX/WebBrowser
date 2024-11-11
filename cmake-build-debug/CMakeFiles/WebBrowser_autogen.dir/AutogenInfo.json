@@ -1274,7 +1274,8 @@
 		"/usr/lib64/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsTargets.cmake",
 		"/usr/lib64/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsTargets-relwithdebinfo.cmake",
 		"/usr/lib64/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsAdditionalTargetInfo.cmake",
-		"/usr/lib64/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsVersionlessTargets.cmake"
+		"/usr/lib64/cmake/Qt6WebEngineWidgets/Qt6WebEngineWidgetsVersionlessTargets.cmake",
+		"/home/eralife/Projects/WebBrowser/resources.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "/home/eralife/Projects/WebBrowser",
 	"CROSS_CONFIG" : false,

@@ -17,13 +17,13 @@ public:
 
     ~DataItemManager();
 
-    QList<DataItem> getAllHistoryData() const;
+    [[nodiscard]] QList<DataItem> getAllHistoryData() const;
 
     void insertHistoryData(const DataItem &data);
 
     void deleteHistoryData(const DataItem &data);
 
-    QList<DataItem> getFavourites();
+    [[nodiscard]] QList<DataItem> getFavourites() const;
 
     void addFavourite(const DataItem &data);
 

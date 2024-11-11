@@ -305,6 +305,7 @@
   /usr/include/qt6/QtCore/QMimeData \
   /usr/include/qt6/QtCore/QObject \
   /usr/include/qt6/QtCore/QRect \
+  /usr/include/qt6/QtCore/QRegularExpression \
   /usr/include/qt6/QtCore/QSize \
   /usr/include/qt6/QtCore/QSizeF \
   /usr/include/qt6/QtCore/QString \

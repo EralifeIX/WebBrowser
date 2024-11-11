@@ -34,8 +34,8 @@ HistoryView::HistoryView(QWidget* parent, const QList<DataItem>& dataItems, cons
 
     lay->addWidget(m_ptable, 9);
     lay->addWidget(m_pdeleteButton, 1);
-    connect(m_ptable, SIGNAL(cellDoubleClicked()), SLOT(slotOnItemClicked()));
-    connect(m_pdeleteButton, SIGNAL(clicked()), SLOT(slotOnDelete(int, int)));
+    connect(m_ptable, &QTableWidget::cellDoubleClicked, this, &HistoryView::slotOnItemClicked);
+    connect(m_pdeleteButton, &QPushButton::clicked, this, &HistoryView::slotOnDelete);
 }
 
 // deleting one the rows

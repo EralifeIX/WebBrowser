@@ -31,6 +31,7 @@
 #include <QKeyEvent>
 #include <QProgressBar>
 #include <QIcon>
+#include <QRegularExpression>
 
 class WebBrowser : public QMainWindow{
 Q_OBJECT
@@ -50,11 +51,12 @@ private:
     const QString HTTPS = "https://";
     const QUrl HOME_PAGE = {"https://google.com"};
 
-    WebView* currentWebView() const;
+    [[nodiscard]] WebView* currentWebView() const;
     void onLoadHistory();
     void onLoadFavourites();
     void addToHistory(const QString& title, const QUrl& urlToAdd);
-    bool isPrivate() const;
+    [[nodiscard]] bool isPrivate() const;
+    [[nodiscard]] bool searchOrNavigate(const QString& str) const;
     void buildComponents();
     void initToolTips();
     void buildMenu();

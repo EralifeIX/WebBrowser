@@ -4,6 +4,7 @@ WebBrowser::WebBrowser(QWidget* parent)
         : QMainWindow(parent)
 {
     onLoadHistory();
+    onLoadFavourites();
     buildComponents();
     initToolTips();
     buildMenu();
@@ -50,7 +51,7 @@ void WebBrowser::buildComponents()
     tabs = new QTabWidget(this);
     menuBar = new QMenuBar( this);
     menu = new QMenu("Menu", this);
-    urlEdit = new QLineEdit(this);
+    urlEdit = new QLineEdit( this);
     searchButton = new QPushButton(QIcon(QStringLiteral(":/assets/search.ico")), "", this);
     newTabButton = new QPushButton(QIcon(QStringLiteral(":/assets/new.ico")), "", this);
     homeButton = new QPushButton(QIcon(QStringLiteral(":/assets/home.ico")), "", this);
@@ -67,11 +68,17 @@ void WebBrowser::buildComponents()
     //setting up
     webView->load(HOME_PAGE);
     webView->settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+
     loadingBar->setVisible(false);
+    loadingBar->setTextVisible(false);
+    loadingBar->setFixedHeight(5);
+    tabs->setElideMode(Qt::ElideRight);
     tabs->setTabsClosable(true);
-    tabs->setEnabled(Qt::ElideRight);
+    tabs->setMovable(true);
+    tabs->tabBar()->setExpanding(false);
+    tabs->tabBar()->setMaximumHeight(30);
     tabs->addTab(webView, "New Tab");
-    tabs->setStyleSheet("QTabWidget::pane { border: 0; }");
+
 }
 
 // Tooltips for buttons
@@ -99,31 +106,31 @@ void WebBrowser::buildMenu()
 
 
 void WebBrowser::applyLayout(){
-    auto lineLayout = new QVBoxLayout();
+    QHBoxLayout* lineLayout = new QHBoxLayout();
     lineLayout->addWidget(urlEdit, 19);
     lineLayout->addWidget(searchButton, 1);
-    lineLayout->setSpacing(0);
     lineLayout->setContentsMargins(0, 0, 0, 0);
 
-    auto topLayout = new QHBoxLayout();
+
+    QHBoxLayout* topLayout = new QHBoxLayout();
     topLayout->setAlignment(Qt::AlignCenter);
     topLayout->addWidget(previousButton, 1);
     topLayout->addWidget(nextButton, 1);
     topLayout->addWidget(reloadButton, 1);
     topLayout->addWidget(homeButton, 1);
-    topLayout->addLayout(lineLayout, 24);
+    topLayout->addLayout(lineLayout, 30);
     topLayout->addWidget(newTabButton, 1);
     topLayout->addWidget(favouritesButton, 1);
     topLayout->addWidget(downloadButton, 1);
     topLayout->addWidget(menuBar, 1);
 
-    auto appLayout = new QVBoxLayout();
-    appLayout->setContentsMargins(0, 5, 0, 0);
+    QVBoxLayout* appLayout = new QVBoxLayout();
+    appLayout->setContentsMargins(0, 0, 0, 0);
     appLayout->addLayout(topLayout, 1);
     appLayout->addWidget(loadingBar, 1);
-    appLayout->addWidget(tabs, 28);
+    appLayout->addWidget(tabs, 10);
 
-     auto central = new QWidget();
+    QWidget* central = new QWidget();
     central->setLayout(appLayout);
     setCentralWidget(central);
 
@@ -142,6 +149,10 @@ void WebBrowser::applyStyle(){
 void WebBrowser::onLoadHistory(){
     history = dataManager.getAllHistoryData();
 }
+
+void WebBrowser::onLoadFavourites(){
+    favourites = dataManager.getFavourites();
+};
 
 void WebBrowser::addToHistory(const QString& title, const QUrl& urlToAdd)
 {
@@ -204,6 +215,17 @@ bool WebBrowser::isPrivate() const{
     return (tabs->tabText(tabs->currentIndex()) == PRIVATE_TAB);
 }
 
+bool WebBrowser::searchOrNavigate(const QString& str) const
+{
+    QRegularExpression domainRegex("^(?!-)([A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}(/.*)?$");
+    QRegularExpressionMatch domainMatch = domainRegex.match(str);
+
+    if(str.contains(" "))
+        return false;
+    if(domainMatch.hasMatch())
+        return true;
+    return false;
+}
 
 void WebBrowser::onUrlChanged()
 {
@@ -214,7 +236,10 @@ void WebBrowser::onUrlChanged()
 
 
 void WebBrowser::onUrl(){
-    onOpenUrl(urlEdit->text());
+    if(searchOrNavigate(urlEdit->text()))
+        onOpenUrl(urlEdit->text());
+    else
+        onOpenUrl("https://www.google.com/search?q=" + urlEdit->text());
 }
 
 void WebBrowser::onOpenUrl(const QUrl& url)
@@ -222,7 +247,7 @@ void WebBrowser::onOpenUrl(const QUrl& url)
      const QUrl newUrl{
      ((url.toString().left(7)) == HTTP || (url.toString().left(8) == HTTPS))
          ? url.toString() : HTTPS + url.toString()};
-    if(!newUrl.isValid())
+    if(newUrl.isValid())
     {
         urlEdit->setText(newUrl.toString());
         currentWebView()->setUrl(newUrl);
@@ -230,6 +255,7 @@ void WebBrowser::onOpenUrl(const QUrl& url)
         {
             tabs->setTabText(tabs->currentIndex(), currentWebView()->title());
             setWindowTitle(currentWebView()->title());
+
         }
     }
 }
@@ -298,7 +324,6 @@ void WebBrowser::updateConnect(){
     connect(currentWebView(), &WebView::iconChanged, this, &WebBrowser::updateIcon);
 }
 
-
 void WebBrowser::onStartLoading()
 {
     loadingBar->setVisible(true);
@@ -321,7 +346,7 @@ void WebBrowser::loadLocalFile()
 {
     const QString fileName = QFileDialog::getOpenFileName(this, "Open a local page", "/home",
                                                         "*.htm *.shtml *.xhtml *.html");
-    WebView* view = new WebView(this);
+    auto view = new WebView(this);
     view->load(QUrl::fromLocalFile(fileName));
     tabs->addTab(view, fileName);
 }

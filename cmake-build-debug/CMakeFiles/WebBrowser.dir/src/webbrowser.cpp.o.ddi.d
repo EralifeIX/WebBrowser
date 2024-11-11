@@ -477,4 +477,6 @@ CMakeFiles/WebBrowser.dir/src/webbrowser.cpp.o.ddi: \
  /usr/include/qt6/QtGui/qpointingdevice.h \
  /usr/include/qt6/QtGui/qinputdevice.h /usr/include/qt6/QtGui/qscreen.h \
  /usr/include/qt6/QtWidgets/QProgressBar \
- /usr/include/qt6/QtWidgets/qprogressbar.h
+ /usr/include/qt6/QtWidgets/qprogressbar.h \
+ /usr/include/qt6/QtCore/QRegularExpression \
+ /usr/include/qt6/QtCore/qregularexpression.h

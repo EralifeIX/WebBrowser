@@ -27,7 +27,7 @@ QList<DataItem> DataItemManager::getAllHistoryData() const
     return historyList;
 }
 
-QList<DataItem> DataItemManager::getFavourites()
+QList<DataItem> DataItemManager::getFavourites() const
 {
     QList<DataItem> historyList{};
     QSqlQuery queryAll{db};
