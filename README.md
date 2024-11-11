@@ -29,7 +29,17 @@ A lightweight web browser developed using Qt 6, designed for a streamlined, user
    ```bash
    git clone https://github.com/EralifeIX/WebBrowser
    cd WebBrowser
-
+2. Build the project using CMake:
+    ```bash
+    mkdir build
+    cd build
+    cmake ..
+    make
+    ```
+3. Run the program:
+    ```bash
+    ./WebBrowser
+    
 
 ## Screenshots
 ------------------------------------------------------------------------------------------------------------------
